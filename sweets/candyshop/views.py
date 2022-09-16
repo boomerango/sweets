@@ -37,7 +37,6 @@ def departmentApi(request,id=0):
         return JsonResponse("Deleted Successfully",safe=False)
 
 '''
-
 @csrf_exempt
 def SaveFile(request):
     file=request.FILES['file']
