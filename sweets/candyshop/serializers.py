@@ -19,6 +19,6 @@ class SweetListSerializer(serializers.ModelSerializer):
 
 class SweetOrdersSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SweetProducts
-        fields = ('OrderId','Customer','ListOfOrders','NumberOfSweets','IDOfSweet',
-                'OrderStatus')
+        model = SweetOrders
+        fields = ('OrderId','Customer','ListOfOrders','NumberOfSweets',
+                'OrderStatus','IDOfSweet')
