@@ -29,3 +29,4 @@ class SweetOrders(models.Model):
     NumberOfSweets = models.CharField(max_length=DEFAULT_CHAR_LENGTH)
     IDOfSweet = models.ForeignKey(SweetProducts,on_delete=models.CASCADE)
     OrderStatus = models.CharField(max_length=DEFAULT_CHAR_LENGTH)
+    Price = models.DecimalField(max_digits=12,decimal_places=2,default = None)

@@ -100,12 +100,16 @@ def sweetOrdersApi(request, id=0):
         return JsonResponse(sweet_order_serializer.data, safe=False)
     elif request.method == 'POST':
         sweet_order_data = JSONParser().parse(request)
+        #calculate price on BE
+        sweetProducts = SweetProducts.objects.get(ProductID=sweet_order_data["IDOfSweet"])
+        price = sweet_order_data["NumberOfSweets"]*sweetProducts.ProductPrice
+        sweet_order_data["Price"] = price
         sweet_order_serializer = SweetOrdersSerializer(data=sweet_order_data)
         if sweet_order_serializer.is_valid():
             sweet_order_serializer.save()
             return JsonResponse("Added Successfully", safe=False)
         return JsonResponse("Failed to Add", safe=False)
-    elif request.method == 'PATCH':
+    elif request.method == 'PUT':
         sweet_order_data = JSONParser().parse(request)
         sweet_order = SweetOrders.objects.get(OrderId=sweet_order_data['OrderId'])
         sweet_order_serializer = SweetOrdersSerializer(sweet_order, data=sweet_order_data)

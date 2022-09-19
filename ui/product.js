@@ -77,23 +77,23 @@ data-bs-target="#exampleModal"
 
         <div class="input-group mb-3">
         <span class="input-group-text">ProductPortions</span>
-        <input type="text" class="form-control" v-model="ProductPortions">
+        <input type="number" class="form-control" v-model="ProductPortions">
         </div>
 
         <div class="input-group mb-3">
         <span class="input-group-text">ProductPrice</span>
-        <input type="text" class="form-control" v-model="ProductPrice">
+        <input type="number" class="form-control" v-model="ProductPrice">
         </div>
 
         <div class="input-group mb-3">
         <span class="input-group-text">ProductWeight</span>
-        <input type="text" class="form-control" v-model="ProductWeight">
+        <input type="number" class="form-control" v-model="ProductWeight">
         </div>
 
     </div>
         <div class="p-2 w-50 bd-highlight">
 
-        <img width="250" height="250"
+        <img width="250" height="250" class="img-fluid" alt="Responsive image"
             :src="PhotoPath+ProductPhotoLink"/>
 
         <input class="m-2" type="file" @change="imageUpload">
@@ -157,11 +157,11 @@ methods:{
         this.ProductID=dep.ProductID;
         this.ProductName=dep.ProductName;
         this.ProductPhotoLink=dep.ProductPhotoLink,
-        this.ProductWeight=0,
-        this.ProductType="",
-        this.ProductPrice=0,
-        this.ProductPortions=0,
-        this.ProductDescription=""
+        this.ProductWeight=dep.ProductWeight,
+        this.ProductType=dep.ProductType,
+        this.ProductPrice=dep.ProductPrice,
+        this.ProductPortions=dep.ProductPortions,
+        this.ProductDescription=dep.ProductDescription
     },
     createClick(){
         axios.post(variables.API_URL+"products",{
@@ -189,15 +189,12 @@ methods:{
         this.tempFields.ProductPortions=this.ProductPortions,
         this.tempFields.ProductDescription=this.ProductDescription
         axios.put(variables.API_URL+"products",this.tempFields
-        // {
-        //     ProductID:this.ProductID,
-        //     ProductName:this.ProductName
-        // }
         )
         .then((response)=>{
             this.refreshData();
             alert(response.data);
-        });
+        }).
+       catch(e=>alert(e.message));
     },
     deleteClick(id){
         if(!confirm("Are you sure?")){
