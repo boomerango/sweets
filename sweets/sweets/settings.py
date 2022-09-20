@@ -78,17 +78,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "sweets.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sweets',
-        'USER': 'root',
-        'PASSWORD': 'asdsf&*vr',
-        'HOST': '127.0.0.1',
+        'NAME': os.environ.get('MYSQL_DATABASE'),
+        'USER': os.environ.get('MYSQL_USER'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+        'HOST': os.environ.get('MYSQL_HOST', 'db'),
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
