@@ -31,7 +31,6 @@ jobs:
     steps:
       - name: setup
         uses: actions/setup-node@v3
-      - name: prepare runtime
         with:
           node-version: 14
       - name: test
